@@ -6,7 +6,8 @@ model.py
 
 class Model(object):
     def __init__(self, **kwargs):
-        self.fields = []
+        if not self.fields:
+            self.fields = []
         self.data = {}
         for field in kwargs:
             if field in self.fields:

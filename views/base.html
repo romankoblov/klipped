@@ -7,8 +7,16 @@
 	<title>{% block title %}Default title{% end %}</title>
 </head>
 <body>
-    {% block content %}
-      <li>хуй</li>
-    {% end %}
+	<div id="menu">
+		<ul>
+			<li><a href="/b.html">Бред</a></li>
+			<li><a href="/rf.html">Убежище</a></li>
+		</ul>
+	</div>
+	<div id="content">
+	    {% block content %}
+	      Говно
+	    {% end %}
+	</div>
 </body>
 </html>

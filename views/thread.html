@@ -3,5 +3,14 @@
 {% block title %}Тред{% end %}
 
 {% block content %}
-     <li><span style="bold">тест</span></li>
+	<div id="thread-1">
+		<div class="thread_op">
+			blah
+		</div>
+		<div class="posts">
+			{% for post in posts %}
+				{% include "post.html" %}
+			{% end %}
+		</div>
+	</div>
 {% end %}
