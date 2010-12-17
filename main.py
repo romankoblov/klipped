@@ -4,6 +4,8 @@
 main.py
 
 """
+import os
+
 # Importing tornado's stuff
 import asyncmongo
 import tornado.httpserver
@@ -19,7 +21,9 @@ class Klipped(tornado.web.Application):
     """ Main application class """
 
 def main():
-    settings = {'debug': True}
+    settings = {'debug': True,
+                'template_path': os.path.join(os.path.dirname(__file__), "views")
+    }
     # TODO: Fix regexps
     application = Klipped([
         (r"/", controllers.main.MainHandler),

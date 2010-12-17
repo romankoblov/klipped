@@ -7,7 +7,7 @@ Thread model
 """
 import utils.model
 
-class ThreadModel(object):
+class ThreadModel(utils.model.Model):
     def __init__(self, **kwargs):
         self.fields = ['id', 'author', 'title', 'body', 'email', 'image']
         super(ThreadModel, self).__init__(**kwargs)
