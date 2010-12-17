@@ -20,10 +20,11 @@ class Klipped(tornado.web.Application):
 
 def main():
     settings = {'debug': True}
+    # TODO: Fix regexps
     application = Klipped([
         (r"/", controllers.main.MainHandler),
-        (r"/([a-z]+)", controllers.board.BoardHandler),
-        (r"/([a-z]+)/([0-9]+).html", controllers.thread.ThreadHandler),
+        (r"/([a-z]+).([a-z]+)", controllers.board.BoardHandler),
+        (r"/([a-z]+)/([0-9]+).([a-z]+)", controllers.thread.ThreadHandler),
     ], **settings)
     http_server = tornado.httpserver.HTTPServer(application)
     http_server.listen(8888)
