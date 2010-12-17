@@ -4,20 +4,27 @@
 main.py
 
 """
-
+# Importing tornado's stuff
 import asyncmongo
+import tornado.httpserver
+import tornado.ioloop
 import tornado.web
+
+# Import controllers
+import controllers.main
+import controllers.board
+import controllers.thread
 
 class Klipped(tornado.web.Application):
     """ Main application class """
-    def __init__(self, routes={}, default_host="", transforms=None,
-                     wsgi=False, **settings):
-        """ Reinitializing Application.__init__ """
-        super(Klipped, self).__init__(handlers=None, default_host="", transforms=None,
-                         wsgi=False, **settings)
 
 def main():
-    application = Klipped()
+    settings = {'debug': True}
+    application = Klipped([
+        (r"/", controllers.main.MainHandler),
+        (r"/([a-z]+)", controllers.board.BoardHandler),
+        (r"/([a-z]+)/([0-9]+).html", controllers.thread.ThreadHandler),
+    ], **settings)
     http_server = tornado.httpserver.HTTPServer(application)
     http_server.listen(8888)
     tornado.ioloop.IOLoop.instance().start()

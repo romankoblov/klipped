@@ -10,11 +10,10 @@ import tornado.web
 
 class BoardHandler(tornado.web.RequestHandler):
     """ Board handler """
-    def get(self):
+    def get(self, board):
         """ Returns list of threads in board """
-        pass
+        self.write('Board handler {board}'.format(board=board))
 
-    def post(self):
+    def post(self, board):
         """ Create new thread """
         pass
-

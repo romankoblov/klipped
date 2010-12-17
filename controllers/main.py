@@ -12,4 +12,4 @@ class MainHandler(tornado.web.RequestHandler):
     """ Main page handler """
     def get(self):
         """ Returns main page """
-        pass
+        self.write('Main handler')
