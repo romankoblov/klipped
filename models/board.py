@@ -5,11 +5,11 @@ board.py
 
 Board model
 """
-import utils.model
+import models
 
-class BoardModel(utils.model.Model):
-    def __init__(self, **kwargs):
+class BoardModel(models.Model):
+    def __init__(self, *args, **kwargs):
         self.fields = ['name']
-        super(ThreadModel, self).__init__(**kwargs)
+        super(BoardModel, self).__init__(*args, **kwargs)
 
 

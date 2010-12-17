@@ -5,9 +5,9 @@ thread.py
 
 Thread model
 """
-import utils.model
+import models
 
-class ThreadModel(utils.model.Model):
-    def __init__(self, **kwargs):
+class ThreadModel(models.Model):
+    def __init__(self, *args, **kwargs):
         self.fields = ['id', 'author', 'title', 'body', 'email', 'image']
-        super(ThreadModel, self).__init__(**kwargs)
+        super(ThreadModel, self).__init__(*args, **kwargs)
