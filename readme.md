@@ -23,3 +23,4 @@ THE SOFTWARE.
 Deps:
 	1. tornado (www.tornadoweb.org)
 	2. brukva (https://github.com/kmerenkov/brukva/)
+	3. simplejson
