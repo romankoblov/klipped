@@ -30,7 +30,10 @@ class ThreadHandler(tornado.web.RequestHandler):
         (_, posts_ids) = yield async(self.application.redis.lrange)("thread:{board}:{thread}:posts".format(board=board, thread=thread), 0, 10)
         ids_keys = ["post:{board}:{thread}:{post_id}:json".format(board=board, thread=thread, post_id=post_id) for post_id in posts_ids]
         (_, posts) = yield async(self.application.redis.mget)(ids_keys)
-        self.render("thread.html", title="My title", posts=posts, post_count=post_count)
+        if format == 'html':
+            self.render("thread.html", title="My title", posts=posts, post_count=post_count)
+        if formta == 'json':
+            pass
 
     @tornado.web.asynchronous
     @adisp.process

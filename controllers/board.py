@@ -31,7 +31,10 @@ class BoardHandler(tornado.web.RequestHandler):
         (_, threads) = yield async(self.application.redis.zrevrange)("board:{board}:threads".format(board=board), 0, 10, with_scores=False)
         if not threads:
             threads = []
-        self.render("board.html", title="My title", threads=threads)
+        if format == 'html':
+            self.render("board.html", title="My title", threads=threads)
+        if format == 'json':
+            pass
 
     @tornado.web.asynchronous
     @adisp.process
