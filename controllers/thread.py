@@ -36,21 +36,5 @@ class ThreadHandler(tornado.web.RequestHandler):
     @adisp.process
     def post(self, board, thread, format='html'):
         """ Adding new post to thread """
-        data = {}
-        for field in ['subject', 'author', 'email', 'password', 'body']:
-            if self.get_argument(field, None):
-                data[field] = self.get_argument(field, None)
-        self.set_header("Content-Type", "text/plain")
-        (_, key) = yield async(self.application.redis.incr)("board:{board}:id".format(board=board))
-        data['id'] = key
-        data['date'] = timestamp(datetime.datetime.now())
-        # Update thread post counts
-        self.application.redis.incr("thread:{board}:{thread}:posts_counts".format(board=board, thread=thread))
-        # Adding post to db
-        self.application.redis.set("post:{board}:{thread}:{post_id}:json".format(board=board, thread=thread, post_id=key), simplejson.dumps(data))
-        # Adding post to thread
-        self.application.redis.rpush("thread:{board}:{thread}:posts".format(board=board, thread=thread), key)
-        # Up thread
-        self.application.redis.zrem("board:{board}:threads".format(board=board), thread)
-        self.application.redis.zadd("board:{board}:threads".format(board=board), timestamp(datetime.datetime.now()), thread)
+        yield self.application.db.add_post(board, thread, self.request.arguments)
         self.redirect('/{board}/{thread}.html'.format(board=board, thread=thread))

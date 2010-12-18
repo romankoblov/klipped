@@ -37,18 +37,5 @@ class BoardHandler(tornado.web.RequestHandler):
     @adisp.process
     def post(self, board, format='html'):
         """ Adding new thread to board """
-        data = {}
-        for field in ['subject', 'author', 'email', 'password', 'body']:
-            if self.get_argument(field, None):
-                data[field] = self.get_argument(field, None)
-        self.set_header("Content-Type", "text/plain")
-        
-        (_, key) = yield async(self.application.redis.incr)("board:{board}:id".format(board=board))
-        print key
-        data['id'] = key
-        self.application.redis.zadd("board:{board}:threads".format(board=board), timestamp(datetime.datetime.now()), key)
-        self.application.redis.incr("thread:{board}:{thread}:posts_counts".format(board=board, thread=key))
-        data_post = {}
-        self.application.redis.set("post:{board}:{thread}:{post_id}:json".format(board=board, thread=key, post_id=key), simplejson.dumps(data))
-        self.application.redis.rpush("thread:{board}:{thread}:posts".format(board=board, thread=key), key)
+        yield self.application.db.add_topic(board, self.request.arguments)
         self.redirect('/{board}.html'.format(board=board))

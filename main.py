@@ -21,8 +21,8 @@ import controllers.board
 import controllers.thread
 
 # Import models
-import models.board
-import models.thread
+import db
+
 
 # Options defines
 define("host", default='127.0.0.1', help="run on the given address", type=str)
@@ -32,13 +32,6 @@ define("debug", default=False, help="debug mode", type=bool)
 define("redis_host", default='localhost', help="redis host", type=str)
 define("redis_port", default=6379, help="redis port", type=int)
 define("redis_password", default='', help="redis password", type=str)
-# Mongo
-#define("mongo_host", default='127.0.0.1', help="mongo host", type=str)
-#define("mongo_port", default=27107, help="mongo port", type=int)
-#define("mongo_maxcached", default=10, help="mongo maxcached", type=int)
-#define("mongo_maxconn", default=50, help="mongo max connections", type=int)
-#define("mongo_db", default='test', help="mongo database name", type=str)
-
 
 class Klipped(tornado.web.Application):
     """ Main application class """
@@ -49,14 +42,7 @@ class Klipped(tornado.web.Application):
         if options.redis_password:
             self.redis.auth(options.redis_password)
         # Models
-        self.board = models.board.BoardModel(self)
-        self.thread = models.thread.ThreadModel(self)
-        # Mongo
-        #self.mongo = asyncmongo.Client(host=options.mongo_host, 
-        #                               port=options.mongo_port,
-        #                               maxcached=options.mongo_maxcached, 
-        #                               maxconnections=options.mongo_maxconn, 
-        #                               dbname=options.mongo_db)
+        self.db = db.KlippeDB(self.redis)
         # Routes
         # TODO: Fix regexps
         handlers = [
