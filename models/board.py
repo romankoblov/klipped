@@ -7,9 +7,9 @@ Board model
 """
 import models
 
-class BoardModel(models.Model):
+class BoardModel(object):
     def __init__(self, *args, **kwargs):
+        self.name = 'board'
         self.fields = ['name']
-        super(BoardModel, self).__init__(*args, **kwargs)
 
 
