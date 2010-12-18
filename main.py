@@ -7,7 +7,7 @@ main.py
 import os
 
 # Importing tornado's stuff
-import asyncmongo
+#import asyncmongo
 import brukva
 import tornado.httpserver
 import tornado.ioloop
@@ -33,11 +33,11 @@ define("redis_host", default='localhost', help="redis host", type=str)
 define("redis_port", default=6379, help="redis port", type=int)
 define("redis_password", default='', help="redis password", type=str)
 # Mongo
-define("mongo_host", default='127.0.0.1', help="mongo host", type=str)
-define("mongo_port", default=27107, help="mongo port", type=int)
-define("mongo_maxcached", default=10, help="mongo maxcached", type=int)
-define("mongo_maxconn", default=50, help="mongo max connections", type=int)
-define("mongo_db", default='test', help="mongo database name", type=str)
+#define("mongo_host", default='127.0.0.1', help="mongo host", type=str)
+#define("mongo_port", default=27107, help="mongo port", type=int)
+#define("mongo_maxcached", default=10, help="mongo maxcached", type=int)
+#define("mongo_maxconn", default=50, help="mongo max connections", type=int)
+#define("mongo_db", default='test', help="mongo database name", type=str)
 
 
 class Klipped(tornado.web.Application):
