@@ -8,7 +8,8 @@ Board model
 import models
 
 class BoardModel(object):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, app):
+        self.app = app
         self.name = 'board'
         self.fields = ['name']
 

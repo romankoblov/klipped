@@ -3,8 +3,19 @@
 {% block title %}Список тредов{% end %}
 
 {% block content %}
-	 <a href="/b/777.html">test</a>
-     <div id="thread-1">
-		blablabla
-	 </div>
+	<form action="" method="post" accept-charset="utf-8">
+		<label for="subject">Subject</label><input type="text/submit/hidden/button" name="subject" value="" id="subject"><br />
+		<label for="author">Author</label><input type="text/submit/hidden/button" name="author" value="" id="author"><br />
+		<label for="email">E-Mail</label><input type="text/submit/hidden/button" name="e-mail" value="" id="e-mail"><br />
+		<label for="password">Password</label><input type="text/submit/hidden/button" name="password" value="" id="password"><br />
+		<textarea name="body" rows="8" cols="40"></textarea><br />
+		<p><input type="submit" value="Continue &rarr;"></p>
+	</form>
+	 <b>Число тредов: {{ thread_count }}</b>
+	 {% for thread in threads %}
+		 <a href="/b/{{ thread }}.html">{{ thread }}</a>
+	     <div id="thread-{{ thread }}">
+			blablabla
+		 </div>
+	 {% end %}
 {% end %}
