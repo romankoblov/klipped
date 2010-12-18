@@ -21,6 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 Deps:
-	1. tornado (www.tornadoweb.org)
-	2. brukva (https://github.com/kmerenkov/brukva/)
-	3. simplejson
+1.  [tornado](http://www.tornadoweb.org)
+2.  [brukva](https://github.com/kmerenkov/brukva/)
+3.  simplejson
