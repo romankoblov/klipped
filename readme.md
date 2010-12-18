@@ -1,6 +1,6 @@
 klipped - new generation imageboard.
 
-Copyright (c) 2010 PenPen <pen2@me.com>, b0n3Z <b0n3zs@gmail.com>, voidy <voidy@jabber.ru>
+Copyright (c) 2010 PenPen <pen2@me.com>, b0n3Z <b0n3zs@gmail.com>, drdaeman <drdaeman@drdaeman.pp.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
