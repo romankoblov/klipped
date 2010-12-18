@@ -7,7 +7,6 @@ Thread controller
 """
 
 import tornado.web
-#from models.thread import ThreadModel
 from brukva import adisp
 from functools import partial
 import simplejson
