@@ -28,10 +28,12 @@ import db
 define("host", default='127.0.0.1', help="run on the given address", type=str)
 define("port", default=8888, help="run on the given port", type=int)
 define("debug", default=False, help="debug mode", type=bool)
+define("mobile", default=False, help="mobile version", type=bool)
 # Redis
 define("redis_host", default='localhost', help="redis host", type=str)
 define("redis_port", default=6379, help="redis port", type=int)
 define("redis_password", default='', help="redis password", type=str)
+
 
 class Klipped(tornado.web.Application):
     """ Main application class """
@@ -52,8 +54,10 @@ class Klipped(tornado.web.Application):
         ]
         # Settings
         settings = {'debug': options.debug,
-                    'template_path': os.path.join(os.path.dirname(__file__), "views")
+                    'template_path': os.path.join(os.path.dirname(__file__), "views/default")
         }
+        if options.mobile:
+            settings['template_path'] = os.path.join(os.path.dirname(__file__), "views/mobile")
         super(Klipped, self).__init__(handlers=handlers, **settings)
 
     def listen(self, port, address="", **kwargs):
