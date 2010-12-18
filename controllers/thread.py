@@ -41,9 +41,7 @@ class ThreadHandler(tornado.web.RequestHandler):
             if self.get_argument(field, None):
                 data[field] = self.get_argument(field, None)
         self.set_header("Content-Type", "text/plain")
-
         (_, key) = yield async(self.application.redis.incr)("board:{board}:id".format(board=board))
-        print key
         data['id'] = key
         data['date'] = timestamp(datetime.datetime.now())
         # Update thread post counts
