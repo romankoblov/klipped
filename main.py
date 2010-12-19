@@ -39,10 +39,8 @@ class Klipped(tornado.web.Application):
     """ Main application class """
     def __init__(self):
         # Redis
-        self.redis = brukva.Client(host=options.redis_host, port=options.redis_port)
+        self.redis = brukva.Client(host=options.redis_host, port=options.redis_port, password=options.redis_password, reconnect=True)
         self.redis.connect()
-        if options.redis_password:
-            self.redis.auth(options.redis_password)
         # Models
         self.db = db.KlippeDB(self.redis)
         # Routes
