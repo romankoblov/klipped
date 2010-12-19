@@ -58,13 +58,13 @@ class KlippeDB(object):
     
     @async
     @adisp.process
-    def add_topic(self, board, post_data, callbacks):
+    def add_thread(self, board, post_data, callbacks):
         data = yield self.validate(board, post_data)
         # Adding thread to board sorted set (with sorting by timestamp)
-        self.insert_topic(board, data['id'], data)
+        self.insert_thread(board, data['id'], data)
         callbacks(True)
 
-    def insert_topic(self, board, key, post_data):
+    def insert_thread(self, board, key, post_data):
         # Adding thread to board sorted set (with sorting by timestamp)
         self.redis.zadd("board:{board}:threads".format(board=board), post_data['date'], post_data['id'])
         # Inserting post to thread

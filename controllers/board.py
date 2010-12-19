@@ -33,12 +33,12 @@ class BoardHandler(tornado.web.RequestHandler):
             threads = []
         if format == 'html':
             self.render("board.html", title="My title", threads=threads)
-        if format == 'json':
+        elif format == 'json':
             pass
 
     @tornado.web.asynchronous
     @adisp.process
     def post(self, board, format='html'):
         """ Adding new thread to board """
-        yield self.application.db.add_topic(board, self.request.arguments)
+        yield self.application.db.add_thread(board, self.request.arguments)
         self.redirect('/{board}.html'.format(board=board))
