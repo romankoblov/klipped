@@ -26,12 +26,16 @@ class ThreadHandler(tornado.web.RequestHandler):
     @adisp.process
     def get(self, board, thread, format='html'):
         """ Returns thread (list of posts) """
-        (_, post_count) = yield async(self.application.redis.get)("thread:{board}:{thread}:posts_counts".format(board=board, thread=thread))
-        (_, posts_ids) = yield async(self.application.redis.lrange)("thread:{board}:{thread}:posts".format(board=board, thread=thread), 0, 10)
-        ids_keys = ["post:{board}:{thread}:{post_id}:json".format(board=board, thread=thread, post_id=post_id) for post_id in posts_ids]
-        (_, posts) = yield async(self.application.redis.mget)(ids_keys)
+        (_, post_count) = yield async(self.application.redis.get)("t:{board}:{thread}:posts_counts".format(board=board, thread=thread))
+        (_, posts_ids) = yield async(self.application.redis.lrange)("t:{board}:{thread}:posts".format(board=board, thread=thread), 0, 10)
+        (_, head) = yield async(self.application.redis.get)("t:{board}:{thread}:head:html".format(board=board, thread=thread))
+        if posts_ids:
+            ids_keys = ["p:{board}:{thread}:{post_id}:html".format(board=board, thread=thread, post_id=post_id) for post_id in posts_ids]
+            (_, posts) = yield async(self.application.redis.mget)(ids_keys)
+        else:
+            posts = []
         if format == 'html':
-            self.render("thread.html", title="My title", posts=posts, post_count=post_count)
+            self.render("thread.html", title="My title", head=head, posts=posts, post_count=post_count)
         elif format == 'json':
             pass
 
@@ -39,5 +43,5 @@ class ThreadHandler(tornado.web.RequestHandler):
     @adisp.process
     def post(self, board, thread, format='html'):
         """ Adding new post to thread """
-        yield self.application.db.add_post(board, thread, self.request.arguments)
+        yield self.application.db.add_post(self, board, thread, self.request.arguments)
         self.redirect('/{board}/{thread}.html'.format(board=board, thread=thread))

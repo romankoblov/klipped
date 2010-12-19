@@ -5,9 +5,9 @@
 {% block content %}
 {% include "form.html" %}
 	 {% for thread in threads %}
-		 <a href="/b/{{ thread }}.html">{{ thread }}</a>
-	     <div id="thread-{{ thread }}">
-			blablabla
+		 <a href="/b/{{ thread['id'] }}.html">№{{thread['id']}}</a>
+	     <div id="thread-{{ thread['id'] }}">
+			{{ thread['html'] }}
 		 </div>
 	 {% end %}
 {% end %}

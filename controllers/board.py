@@ -28,11 +28,17 @@ class BoardHandler(tornado.web.RequestHandler):
     @adisp.process
     def get(self, board, format='html'):
         """ Returns threads """
-        (_, threads) = yield async(self.application.redis.zrevrange)("board:{board}:threads".format(board=board), 0, 10, with_scores=False)
+        (_, threads_ids) = yield async(self.application.redis.zrevrange)("b:{board}:threads".format(board=board), 0, 10, with_scores=False)
+        (_, threads) = yield async(self.application.redis.mget)(["t:{board}:{thread}:html".format(board=board, thread=id) for id in threads_ids])
+        if not threads_ids:
+            threads_ids = []
         if not threads:
             threads = []
+        res = []
+        for i in range(0, len(threads_ids)):
+            res.append({'id': str(threads_ids[i]), 'html': threads[i]})
         if format == 'html':
-            self.render("board.html", title="My title", threads=threads)
+            self.render("board.html", title="My title", threads=res)
         elif format == 'json':
             pass
 
@@ -40,5 +46,5 @@ class BoardHandler(tornado.web.RequestHandler):
     @adisp.process
     def post(self, board, format='html'):
         """ Adding new thread to board """
-        yield self.application.db.add_thread(board, self.request.arguments)
+        yield self.application.db.add_thread(self, board, self.request.arguments)
         self.redirect('/{board}.html'.format(board=board))

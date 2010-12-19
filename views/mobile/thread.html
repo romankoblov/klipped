@@ -6,8 +6,11 @@
 {% include "form.html" %}
 <h3>Число постов: {{ post_count }}</h3>
 <div class="thread" id="thread1">
+	<div class="thread_head">
+		{{ head }}
+	</div>
     {% for post in posts %}
-		{% include "post.html" %}
+		{{ post }}
 	{% end %}
 </div>
 {% end %}
