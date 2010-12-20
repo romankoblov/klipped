@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Список тредов{% end %}
+
+{% block content %}
+{% include "form.html" %}
+	 {% for thread in threads %}
+		 <a href="/b/{{ thread['id'] }}.html">№{{thread['id']}}</a>
+	     <div id="thread-{{ thread['id'] }}">
+			{{ thread['html'] }}
+		 </div>
+	 {% end %}
+{% end %}
