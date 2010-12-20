@@ -34,9 +34,12 @@ class BoardHandler(tornado.web.RequestHandler):
             threads_ids = []
         if not threads:
             threads = []
-        res = []
-        for i in range(0, len(threads_ids)):
-            res.append({'id': str(threads_ids[i]), 'html': threads[i]})
+        if len(threads) != len(thread_ids):
+            res = []
+        else:
+            res = []
+            for i in range(0, len(threads_ids)):
+                res.append({'id': str(threads_ids[i]), 'html': threads[i]})
         if format == 'html':
             self.render("board.html", title="My title", threads=res)
         elif format == 'json':
