@@ -1,6 +1,22 @@
+# Klipped
+
 klipped - new generation imageboard.
 
-Copyright (c) 2010 PenPen <pen2@me.com>, b0n3Z <b0n3zs@gmail.com>, drdaeman <drdaeman@drdaeman.pp.ru>
+## What?
+
+There's not much documentation yet. Use the source, Luke.
+
+## Dependencies
+
+1. [tornado](http://www.tornadoweb.org/)
+2. [brukva](https://github.com/kmerenkov/brukva/)
+3. [simplejson](http://code.google.com/p/simplejson/)
+4. [decorator](http://pypi.python.org/pypi/decorator)
+
+## Licensing
+
+Copyright (c) 2010 PenPen <pen2@me.com>, b0n3Z <b0n3zs@gmail.com>,
+drdaeman <drdaeman@drdaeman.pp.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,8 +35,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
-Deps:
-1.  [tornado](http://www.tornadoweb.org)
-2.  [brukva](https://github.com/kmerenkov/brukva/)
-3.  simplejson
