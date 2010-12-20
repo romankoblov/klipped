@@ -1,2 +1,3 @@
-klipped.conf
 /klipped.conf
+*.pyc
+*.pyo
