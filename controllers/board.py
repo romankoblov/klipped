@@ -34,7 +34,7 @@ class BoardHandler(tornado.web.RequestHandler):
             threads_ids = []
         if not threads:
             threads = []
-        if len(threads) != len(thread_ids):
+        if len(threads) != len(threads_ids):
             res = []
         else:
             res = []
