@@ -9,7 +9,7 @@ There's not much documentation yet. Use the source, Luke.
 ## Dependencies
 
 1. [tornado](http://www.tornadoweb.org/)
-2. [brukva](https://github.com/kmerenkov/brukva/)
+2. [brukva](https://github.com/penpen/brukva/)
 3. [simplejson](http://code.google.com/p/simplejson/)
 4. [decorator](http://pypi.python.org/pypi/decorator)
 
